@@ -1,0 +1,91 @@
+:root {
+  /* Colors - Sleek harmonized dark mode palette */
+  --bg-primary: #0a0f1d;
+  --bg-surface: rgba(18, 26, 47, 0.65);
+  --bg-card: rgba(30, 41, 71, 0.45);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-primary: #10b981; /* Cricket Emerald green */
+  --accent-glow: rgba(16, 185, 129, 0.15);
+  --border-glow: rgba(16, 185, 129, 0.3);
+  
+  --border-color: rgba(148, 163, 184, 0.12);
+  --border-focus: rgba(16, 185, 129, 0.6);
+  
+  /* Agent specific color guidelines (used as text-accent / details) */
+  --color-emotion: #8b5cf6;
+  --color-fan: #f97316;
+  --color-coach: #3b82f6;
+  --color-meme: #ec4899;
+  --color-risk: #f59e0b;
+  --color-local: #ef4444;
+
+  /* Typography - Strict: Max 3 font sizes used on screen */
+  --fs-small: 0.75rem;   /* 12px: metadata, tags, time */
+  --fs-medium: 0.875rem; /* 14px: body text, chat, commentaries */
+  --fs-large: 1.25rem;   /* 20px: scoreboard numbers, headings, titles */
+  /* If absolutely needed for a big display number, we can scale, but sticking to 3 sizes across UI is premium. */
+
+  /* Spacing Grid - Strict 8px grid */
+  --grid-1: 0.5rem;  /* 8px */
+  --grid-2: 1rem;    /* 16px */
+  --grid-3: 1.5rem;  /* 24px - Min card padding */
+  --grid-4: 2rem;    /* 32px */
+  --grid-5: 3rem;    /* 48px */
+  
+  /* Touch target rule */
+  --min-touch-target: 44px;
+
+  /* Transitions */
+  --transition-micro: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-panel: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  /* Backdrop Blur */
+  --blur-amount: blur(12px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  /* Deep field ambient gradient mesh */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(16,185,129,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 70%, rgba(59,130,246,0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 50% 0%, rgba(139,92,246,0.05) 0%, transparent 50%);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--fs-medium);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.4);
+}

@@ -1,0 +1,155 @@
+/* Premium Glassmorphism & Reusable Components */
+
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: border-color var(--transition-micro), box-shadow var(--transition-micro);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--grid-3); /* Strict Min 24px padding rule */
+  transition: transform var(--transition-micro), border-color var(--transition-micro), box-shadow var(--transition-micro);
+}
+
+/* Hover and focus states on interactive elements */
+.glass-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* Form input styling */
+.glass-input {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--fs-medium);
+  padding: var(--grid-1) var(--grid-2);
+  min-height: var(--min-touch-target); /* Strict touch target */
+  width: 100%;
+  transition: border-color var(--transition-micro), box-shadow var(--transition-micro);
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.25);
+}
+
+/* Button component styles with hover + focus + min touch target */
+.btn-primary {
+  background: var(--accent-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #052e16;
+  font-family: inherit;
+  font-size: var(--fs-medium);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--grid-1);
+  min-height: var(--min-touch-target);
+  padding: 0 var(--grid-2);
+  transition: background var(--transition-micro), transform var(--transition-micro), box-shadow var(--transition-micro);
+}
+
+.btn-primary:hover {
+  background: #34d399;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  background: var(--text-muted);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--fs-medium);
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--grid-1);
+  min-height: var(--min-touch-target);
+  padding: 0 var(--grid-2);
+  transition: background var(--transition-micro), border-color var(--transition-micro);
+}
+
+.btn-secondary:hover {
+  background: rgba(148, 163, 184, 0.15);
+  border-color: var(--text-muted);
+}
+
+.btn-secondary:focus {
+  outline: none;
+  border-color: var(--border-focus);
+}
+
+/* Badge components */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-live {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: pulse-border 2s infinite;
+}
+
+/* Overwrite Vite's app wrapper layouts */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
