@@ -1,3 +1,10 @@
+export interface LiveMatchInfo {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+}
+
 export type WicketType = 'bowled' | 'caught' | 'lbw' | 'run_out' | 'stumped' | 'hit_wicket';
 
 export interface Player {
@@ -37,6 +44,8 @@ export interface MatchState {
   status: string;
   winProbability: number; // calculated percentage for batting team
   recentBalls: string[];  // e.g., ['1', '4', 'W', 'Wd', '6', '0']
+  mode?: 'simulation' | 'live';
+  liveUrl?: string;
 }
 
 export interface MatchEvent {
@@ -100,3 +109,4 @@ export interface UIFilters {
   selectedLanguages: string[];
   searchQuery: string;
 }
+

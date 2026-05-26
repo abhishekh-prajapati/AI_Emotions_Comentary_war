@@ -127,11 +127,22 @@ export const AgentSelector: React.FC = () => {
               </div>
 
               {/* Action buttons */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
                 <button
                   onClick={() => pinAgent(p.id)}
-                  style={{ background: 'transparent', border: 'none', color: isPinned ? '#eab308' : 'var(--text-muted)', cursor: 'pointer' }}
-                  title="Pin Commentator"
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: isPinned ? '#eab308' : 'var(--text-muted)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minWidth: '24px',
+                    minHeight: '24px',
+                    padding: 0
+                  }}
+                  title={isPinned ? "Unpin Commentator" : "Pin Commentator"}
                 >
                   <Star size={16} fill={isPinned ? '#eab308' : 'transparent'} />
                 </button>
@@ -141,15 +152,23 @@ export const AgentSelector: React.FC = () => {
                   style={{
                     background: isActive ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)',
                     color: isActive ? '#052e16' : 'var(--text-secondary)',
-                    minHeight: '32px',
-                    padding: '0 8px',
-                    borderRadius: 'var(--radius-sm)'
+                    minHeight: '36px',
+                    width: '36px',
+                    borderRadius: '50%',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid var(--border-color)',
+                    cursor: 'pointer',
+                    transition: 'all 150ms ease'
                   }}
+                  title={isActive ? "Mute Commentator" : "Listen to Commentator"}
                 >
-                  {isActive ? <Volume2 size={14} /> : <VolumeX size={14} />}
-                  <span style={{ fontSize: '11px' }}>{isActive ? 'Listen' : 'Mute'}</span>
+                  {isActive ? <Volume2 size={16} /> : <VolumeX size={16} />}
                 </button>
               </div>
+
             </div>
           );
         })}

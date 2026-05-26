@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { AgentId, UIFilters } from '../types';
+import { speechManager } from '../engine/speechManager';
 
 interface UIStore {
   activeAgentIds: AgentId[];
@@ -7,6 +8,7 @@ interface UIStore {
   pinnedAgentIds: AgentId[];
   activePanel: 'match' | 'agents' | 'leaderboard';
   isAudioOn: boolean;
+  activeSpeakingAgentId: AgentId | null;
   
   toggleAgent: (id: AgentId) => void;
   pinAgent: (id: AgentId) => void;
@@ -24,6 +26,7 @@ export const useUIStore = create<UIStore>((set) => ({
   pinnedAgentIds: [],
   activePanel: 'match',
   isAudioOn: false,
+  activeSpeakingAgentId: null,
   filters: {
     selectedTones: [],
     selectedExpertise: [],
@@ -85,6 +88,13 @@ export const useUIStore = create<UIStore>((set) => ({
   }),
 
   setActivePanel: (activePanel) => set({ activePanel }),
-  toggleAudio: () => set((state) => ({ isAudioOn: !state.isAudioOn }))
+  toggleAudio: () => set((state) => {
+    const nextAudio = !state.isAudioOn;
+    if (!nextAudio) {
+      speechManager.stop();
+    }
+    return { isAudioOn: nextAudio };
+  })
 }));
+
 export default useUIStore;

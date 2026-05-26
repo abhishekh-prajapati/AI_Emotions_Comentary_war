@@ -5,13 +5,9 @@ import { Smile, Send, Flame, Award, Heart } from 'lucide-react';
 export const LiveChat: React.FC = () => {
   const { messages, sentimentScore, sentimentLabel, addMessage, addReaction } = useChatStore();
   const [inputText, setInputText] = useState('');
-  const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto scroll to bottom when new messages arrive
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
 
+  // Messages are stacked newest on top, so no scroll-to-bottom needed.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
@@ -61,7 +57,7 @@ export const LiveChat: React.FC = () => {
 
       {/* Messages Scroll container */}
       <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', paddingRight: '4px' }}>
-        {messages.map(msg => (
+        {[...messages].reverse().map(msg => (
           <div
             key={msg.id}
             style={{
@@ -116,8 +112,8 @@ export const LiveChat: React.FC = () => {
             </div>
           </div>
         ))}
-        <div ref={chatEndRef} />
       </div>
+
 
       {/* Input Form with validation */}
       <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '8px', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>

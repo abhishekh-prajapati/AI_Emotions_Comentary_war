@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { CommentaryEntry } from '../../types';
 import { useCommentaryStore } from '../../store/commentaryStore';
-import { Heart, Smile, AlertCircle, ArrowUp } from 'lucide-react';
+import { useUIStore } from '../../store/uiStore';
+import { Heart, Smile, AlertCircle } from 'lucide-react';
 
 interface CommentaryCardProps {
   entry: CommentaryEntry;
@@ -9,7 +10,10 @@ interface CommentaryCardProps {
 
 export const CommentaryCard: React.FC<CommentaryCardProps> = ({ entry }) => {
   const { likeCommentary } = useCommentaryStore();
+  const { activeSpeakingAgentId } = useUIStore();
   const [liked, setLiked] = useState(false);
+
+  const isSpeaking = activeSpeakingAgentId === entry.agentId;
 
   const handleLike = () => {
     likeCommentary(entry.id);
@@ -32,7 +36,11 @@ export const CommentaryCard: React.FC<CommentaryCardProps> = ({ entry }) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
-        padding: '24px' // Strict 24px padding rule
+        padding: '24px', // Strict 24px padding rule
+        boxShadow: isSpeaking ? `0 0 16px 2px ${entry.color}44` : 'none',
+        borderColor: isSpeaking ? entry.color : 'var(--border-color)',
+        transform: isSpeaking ? 'scale(1.01)' : 'scale(1)',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
     >
       {/* Header */}
@@ -40,14 +48,24 @@ export const CommentaryCard: React.FC<CommentaryCardProps> = ({ entry }) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '20px' }}>{entry.avatar}</span>
           <div>
-            <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
-              {entry.agentName}
-            </h4>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                {entry.agentName}
+              </h4>
+              {isSpeaking && (
+                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '2px', height: '12px', paddingBottom: '2px' }} title="Speaking">
+                  <div className="wave-bar" style={{ animationDelay: '0.1s', background: entry.color }} />
+                  <div className="wave-bar" style={{ animationDelay: '0.3s', background: entry.color }} />
+                  <div className="wave-bar" style={{ animationDelay: '0.5s', background: entry.color }} />
+                </div>
+              )}
+            </div>
             <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
               {new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
             </span>
           </div>
         </div>
+
 
         {/* NLP Sentiment Badge */}
         <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
